@@ -73,16 +73,16 @@ runs:
   - name: Install trellis-cli
     run: |
       curl -sL https://roots.io/trellis/cli/get | bash -s -- -b "$HOME/.local/bin"
-      echo "$HOME/.local/bin" >> $GITHUB_PATH/trellis
+      echo "$HOME/.local/bin" >> $GITHUB_PATH
     shell: bash
   - name: Install Trellis dependencies
-    run: trellis init
+    run: cd trellis/ && trellis init
     shell: bash
   - name: Deploy default site
-    if: inputs.deploy == 'true' && inputs.web-hostname == ''
+    if: inputs.deploy == 'true' && inputs.hostname == ''
     run: trellis deploy --branch=${{inputs.branch }} ${{ inputs.environment }}
     shell: bash
   - name: Deploy site
-    if: inputs.deploy == 'true' && inputs.web-hostname != ''
-    run: trellis deploy --branch=${{inputs.branch }} ${{ inputs.environment }} ${{ inputs.web-hostname }}
+    if: inputs.deploy == 'true' && inputs.hostname != ''
+    run: trellis deploy --branch=${{inputs.branch }} ${{ inputs.environment }} ${{ inputs.hostname }}
     shell: bash
