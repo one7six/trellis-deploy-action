@@ -29,7 +29,7 @@ inputs:
     description: 'Git branch to deploy. Defaults to `master`.'
     required: false
     default: master
-  web-hostname:
+  hostname:
     description: 'Name of the Trellis site to deploy (defaults the first site if not specified)'
     required: false
   ansible-vault-password:
