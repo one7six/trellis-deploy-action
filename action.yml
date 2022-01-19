@@ -73,7 +73,7 @@ runs:
   - name: Install trellis-cli
     run: |
       curl -sL https://roots.io/trellis/cli/get | bash -s -- -b "$HOME/.local/bin"
-      echo "$HOME/.local/bin" >> $GITHUB_PATH
+      echo "$HOME/.local/bin" >> $GITHUB_PATH/trellis
     shell: bash
   - name: Install Trellis dependencies
     run: trellis init
