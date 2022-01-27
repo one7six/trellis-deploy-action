@@ -13,7 +13,7 @@ inputs:
   python-version:
     description: 'Version of Python'
     required: false
-    default: '3.9'
+    default: '3.9.9'
   trellis-cli-version:
     description: 'Version of trellis-cli'
     required: false
