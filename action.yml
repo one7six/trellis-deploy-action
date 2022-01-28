@@ -38,9 +38,6 @@ inputs:
     description: 'Notify about deploy on Slack.'
     required: false
     default: 'no'
-  slack-webhook-url:
-    description: 'Slack Webhook URL. Use a GitHub secret for this value.'
-    required: false
   
 runs:
   using: 'composite'
