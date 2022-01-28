@@ -86,6 +86,8 @@ runs:
   - name: Slack notify
     uses: 8398a7/action-slack@v3
     with:
+      status: ${{ job.status }}
+      fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
       slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
     env:
       SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }}
