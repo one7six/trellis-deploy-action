@@ -90,3 +90,4 @@ runs:
       fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
     env:
       SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }}
+    if: always()
