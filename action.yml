@@ -39,8 +39,8 @@ inputs:
     required: false
     default: 'no'
   slack-webhook-url:
-    description: 'Slack webhook URL'
-    required: false   
+    description: 'Slack Webhook URL'
+    required: true
   
 runs:
   using: 'composite'
