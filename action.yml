@@ -38,6 +38,9 @@ inputs:
     description: 'Notify about deploy on Slack.'
     required: false
     default: 'no'
+  slack-webhook-url:
+    description: 'Slack webhook URL'
+    required: false   
   
 runs:
   using: 'composite'
@@ -82,5 +85,7 @@ runs:
     shell: bash
   - name: Slack notify
     uses: rtCamp/action-slack-notify@v2
+    with:
+      slack-webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
     env:
-      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      SLACK_WEBHOOK: ${{ inputs.slack-webhook-url }}
