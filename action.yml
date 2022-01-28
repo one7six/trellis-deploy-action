@@ -38,6 +38,10 @@ inputs:
   ssh-known-hosts:
     description: 'Known hosts for SSH. Use a GitHub secret for this value.'
     required: true
+  slack-notify:
+    description: 'Notify about deploy on Slack.'
+    required: false
+    default: 'no'
   
 runs:
   using: 'composite'
@@ -78,3 +82,12 @@ runs:
     if: inputs.deploy == 'true' && inputs.hostname == ''
     run: trellis deploy --branch=${{inputs.branch }} ${{ inputs.environment }}
     shell: bash
+  - name: Slack notify
+    uses: 8398a7/action-slack@v3
+    if: inputs.slack-notify == 'yes'
+    with:
+      status: ${{ job.status }}
+      fields: repo,message,action,author # selectable (default: repo,message)
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+    if: always() # Pick up events even if the job fails or is canceled.
