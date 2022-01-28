@@ -40,20 +40,22 @@ inputs:
     default: 'no'
   slack-webhook-url:
     description: 'Slack Webhook URL. Use a GitHub secret for this value.'
-    required: true
-  
+    required: false
   
 runs:
   using: 'composite'
   steps:
-  - uses: actions/setup-python@v2
+  - name: Python setup
+    uses: actions/setup-python@v2
     with:
       python-version: ${{ inputs.python-version }}
-  - uses: shimataro/ssh-key-action@v2
+  - name: SSH add known_hosts
+    uses: shimataro/ssh-key-action@v2
     with:
       key: ${{ inputs.ssh-private-key }}
       known_hosts: ${{ inputs.ssh-known-hosts }}
-  - uses: webfactory/ssh-agent@v0.5.4
+  - name: SSH add private key
+    uses: webfactory/ssh-agent@v0.5.4
     with:
       ssh-private-key: ${{ inputs.ssh-private-key }}
   - name: Create Ansible vault password file
@@ -89,4 +91,4 @@ runs:
       status: ${{ job.status }}
       fields: repo,message,action,author # selectable (default: repo,message)
     env:
-      SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }} # required
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
