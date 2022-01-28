@@ -45,17 +45,14 @@ inputs:
 runs:
   using: 'composite'
   steps:
-  - name: Python setup
-    uses: actions/setup-python@v2
+  - uses: actions/setup-python@v2
     with:
       python-version: ${{ inputs.python-version }}
-  - name: SSH add known_hosts
-    uses: shimataro/ssh-key-action@v2
+  - uses: shimataro/ssh-key-action@v2
     with:
       key: ${{ inputs.ssh-private-key }}
       known_hosts: ${{ inputs.ssh-known-hosts }}
-  - name: SSH add private key
-    uses: webfactory/ssh-agent@v0.5.4
+  - uses: webfactory/ssh-agent@v0.5.4
     with:
       ssh-private-key: ${{ inputs.ssh-private-key }}
   - name: Create Ansible vault password file
