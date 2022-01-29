@@ -36,12 +36,11 @@ inputs:
     required: true
   slack-notify:
     description: 'Notify about deploy on Slack.'
-    required: false
+    required: true
     default: 'no'
   slack-webhook-url:
-    description: 'Slack Webhook URL. Use a GitHub secret for this value.'
+    description: 'Slack Webhook URL'
     required: true
-  
   
 runs:
   using: 'composite'
@@ -87,6 +86,6 @@ runs:
       inputs.slack-notify == 'yes'
     with:
       status: ${{ job.status }}
-      fields: repo,message,action,author # selectable (default: repo,message)
+      fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
     env:
-      SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }} # required
+      SLACK_WEBHOOK_URL: ${{ inputs.slack-webhook-url }}
